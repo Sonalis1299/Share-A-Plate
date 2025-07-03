@@ -1,6 +1,6 @@
 const { initializeApp, cert } = require("firebase-admin/app");
 const { getFirestore } = require("firebase-admin/firestore");
-var serviceAccount = require("./key.json");
+const serviceAccount = JSON.parse(process.env.GOOGLE_CREDENTIALS);
 
 initializeApp({
   credential: cert(serviceAccount),
@@ -591,6 +591,8 @@ app.get("/logout", (req, res) => {
 
 
 
-app.listen(3000, () => {
-  console.log("Server runs on port 3000");
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
+
